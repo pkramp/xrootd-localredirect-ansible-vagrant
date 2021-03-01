@@ -1,0 +1,20 @@
+---
+
+ - name: Put SELinux in permissive mode, logging actions that would be blocked.
+   selinux:
+    policy: targeted
+    state: permissive
+    
+ - name: Install necessary repositories
+   package:
+    name:
+     - epel-release
+    state: present
+   
+ - name: install prerequisites
+   package:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+   with_items:
+    - xrootd-client

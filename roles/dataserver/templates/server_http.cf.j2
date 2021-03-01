@@ -1,0 +1,17 @@
+all.role server
+xrd.port 1094
+all.pidpath /tmp/
+all.adminpath /tmp/
+cms.space 1k 2k
+all.export / r/w
+oss.localroot /xrdmnt/
+
+if exec xrootd
+xrd.protocol http:80 /usr/local/lib/libXrdHttp.so
+fi
+
+ofs.authorize
+ofs.authlib /usr/local/lib/libXrdAccSciTokens-4.so config=/etc/xrootd/scitokens.cfg
+
+# Pass the bearer token to the Xrootd authorization framework.
+http.header2cgi Authorization authz

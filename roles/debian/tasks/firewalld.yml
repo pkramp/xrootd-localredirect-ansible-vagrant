@@ -1,0 +1,28 @@
+---
+  - name: Supply firewalld config
+    template:
+       src: firewalld.conf.j2
+       dest: /etc/firewalld/firewalld.conf
+       mode: 0644
+
+  - name: Supply firewalld internal.xml
+    template:
+       src: internal.xml
+       dest: /etc/firewalld/zones/internal.xml
+       mode: 0644
+
+  - name: Restart firewalld
+    service: name=firewalld state=restarted
+
+  - name: Allow configured source ips in firewalld
+    firewalld:
+     source: "{{ item }}"
+     permanent: yes
+     state: enabled
+     zone: internal
+    vars:
+     file_contents_lines: "{{ lookup('file', 'configs/allowed-sources.txt').splitlines() }}"
+    with_items: "{{ file_contents_lines }}"
+
+  - name: Restart firewalld
+    service: name=firewalld state=restarted

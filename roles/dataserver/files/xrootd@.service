@@ -1,0 +1,20 @@
+[Unit]
+Description=XRootD xrootd daemon instance %i
+Documentation=man:xrootd(8)
+Documentation=http://xrootd.org/docs.html
+#Requires=network-online.target
+#After=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/xrootd -d -l /tmp/xrootd/xrootd.log -c /etc/xrootd/xrootd.cf -k fifo -s /tmp/xrootd-%i.pid -n %i
+User=xrootd
+Group=xrootd
+Type=simple
+Restart=on-abort
+RestartSec=0
+KillMode=control-group
+LimitNOFILE=65536
+WorkingDirectory=/tmp
+
+[Install]
+RequiredBy=multi-user.target

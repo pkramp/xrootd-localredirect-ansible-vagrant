@@ -1,0 +1,4 @@
+[submodule "XrootD"]
+    path = roles/dataserver/files
+    url = https://github.com/pkramp/xrootd.git
+    branch = HTTPCmsRedirLocal

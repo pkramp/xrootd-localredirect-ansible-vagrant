@@ -4,9 +4,9 @@
   roles:
     - client
 
-#- hosts: dataserver
-#  become: yes
-#  vars_files:
-#    - secrets.yml
-#  roles:
-#    - dataserver
+- hosts: dataserver
+  become: yes
+  vars_files:
+    - secrets.yml
+  roles:
+    - dataserver

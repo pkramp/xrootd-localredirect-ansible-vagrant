@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "dataserver" do |dataserver|
-    dataserver.landrush.enabled = true
+  #  dataserver.landrush.enabled = true
     dataserver.vm.hostname="dataserver.vagrant.test"
     dataserver.vm.box = "centos/7"
     dataserver.vm.network "private_network", ip: "172.16.1.202",netmask:"255.240.0.0"

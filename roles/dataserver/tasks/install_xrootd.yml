@@ -1,5 +1,10 @@
 ---
-
+ - name: Install necessary repositories
+   package:
+    name:
+     - epel-release
+    state: present
+    
  - name: Install required packages
    package:
     name: "{{ item }}"
@@ -12,25 +17,35 @@
     - cmake3
     - gcc-c++
     - zlib-devel
+    - systemd-devel
     - openssl-devel
+    - libuuid
     - libuuid-devel
     - libcurl-devel
+    - libxml2
     - libxml2-devel
     - readline-devel
     - openssl11
     - openssl11-devel
     - unzip
     - openssl
+    - fuse
+    - fuse-devel
     - libsqlite3x-devel.x86_64
 
- - name: Download xrootd
-   git:
-    repo: https://github.com/xrootd/xrootd.git
-    dest: /tmp/xrootd
-    version:  v5.1.0-rc6
-    force: yes
-   environment:
-     https_proxy: "{{ http_proxy }}:{{ http_port }}"
+ - name: Copy custom xrootd source
+   synchronize:
+     src: files/xrootd
+     dest: /tmp/
+
+# - name: Download xrootd
+#   git:
+#    repo: https://github.com/xrootd/xrootd.git
+#    dest: /tmp/xrootd
+#    version:  v5.1.0-rc6
+#    force: yes
+#   environment:
+#     https_proxy: "{{ http_proxy }}:{{ http_port }}"
   # register: xrootd
 
  - name: Creates /tmp/xrootd/build
@@ -44,16 +59,16 @@
    command: cmake3 -DCMAKE_INSTALL_PREFIX=/usr/ ../
    args:
     chdir: "/tmp/xrootd/build"
-   environment:
-    CPLUS_INCLUDE_PATH: /usr/include/openssl11/
+#   environment:
+#    CPLUS_INCLUDE_PATH: /usr/include/openssl11/
   # when: xrootd.changed
 
  - name: Make xrootd
    command: make -j 8
    args:
     chdir: "/tmp/xrootd/build"
-   environment:
-    CPLUS_INCLUDE_PATH: /usr/include/openssl11/
+#   environment:
+#    CPLUS_INCLUDE_PATH: /usr/include/openssl11/
   # when: xrootd.changed
 
  - name: Install xrootd from src /tmp/xrootd/build'

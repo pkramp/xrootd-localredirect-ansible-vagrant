@@ -14,8 +14,8 @@
    command: setcap CAP_NET_BIND_SERVICE=+eip {{ item }}
    become_method: sudo
    with_items:
-     - /usr/local/bin/xrootd
-     - /usr/local/bin/cmsd
+     - /usr/bin/xrootd
+     - /usr/bin/cmsd
 
  - name: Ensure group "xrootd" exists
    group:
@@ -29,18 +29,10 @@
     group: xrootd
     state: present
 
- - name: Provision config file for xrootd
-   template:
-    src: "server_http.cf.j2"
-    dest: /etc/xrootd/xrootd.cf
-    owner: xrootd
-    group: xrootd
-
- - name: Copy server.cer
-   template:
-    src: "secrets/server.cer"
-    dest: /usr/local/share/ca-certificates/server.crt
-
+# - name: Copy server.cer
+#   template:
+#    src: "secrets/server.cer"
+#    dest: /usr/local/share/ca-certificates/server.crt
 
  - name: Creates directories
    file:
@@ -55,6 +47,14 @@
      - "/xrdmnt/data_1/"
      - "/xrdmnt/data_2/"
      - "/xrdmnt/data_1/{{ansible_hostname}}/"
+     - "/var/run/xrootd"
+
+ - name: Provision config file for xrootd
+   template:
+    src: "server_http.cf.j2"
+    dest: /etc/xrootd/xrootd.cf
+    owner: xrootd
+    group: xrootd
 
  - name: copy testfile
    copy:
@@ -70,6 +70,7 @@
 
  - name: Enable xrootd services
    service:
+    daemon_reload: yes
     name: "{{ item }}@xrootd"
     enabled: true
    with_items:
@@ -78,6 +79,7 @@
 
  - name: restart xrootd services
    service:
+    daemon_reload: yes
     name: "{{ item }}@xrootd"
     state: restarted
    with_items:

@@ -6,7 +6,5 @@
 
 - hosts: dataserver
   become: yes
-  vars_files:
-    - secrets.yml
   roles:
     - dataserver

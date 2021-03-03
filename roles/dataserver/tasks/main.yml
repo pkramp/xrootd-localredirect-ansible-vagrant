@@ -1,7 +1,3 @@
 ---
   - include: install_xrootd.yml
-  - include: install_gtest.yml
-  - include: install_jwt.yml
-  - include: install_scitoken_cpp.yml
-  - include: install_xrootd_scitoken.yml
-  - include: alice-xrootd.yml
+  - include: configure-xrootd.yml

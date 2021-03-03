@@ -20,4 +20,14 @@ Vagrant.configure("2") do |config|
           ansible.playbook= "playbook.yml"
     end
   end
+  
+  config.vm.define "redirector" do |redirector|
+  #  dataserver.landrush.enabled = true
+    redirector.vm.hostname="redirector.vagrant.test"
+    redirector.vm.box = "centos/7"
+    redirector.vm.network "private_network", ip: "172.16.1.203",netmask:"255.240.0.0"
+    redirector.vm.provision :ansible do |ansible|
+          ansible.playbook= "playbook.yml"
+    end
+  end
 end

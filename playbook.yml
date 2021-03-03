@@ -10,8 +10,8 @@
     - xrootd
     - dataserver
 
-#- hosts: redirector
-#  become: yes
-#  roles:
-#    - xrootd
-#    - redirector
+- hosts: redirector
+  become: yes
+  roles:
+    - xrootd
+    - redirector

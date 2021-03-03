@@ -1,3 +1,2 @@
 ---
-  - include: install_xrootd.yml
   - include: configure-xrootd.yml

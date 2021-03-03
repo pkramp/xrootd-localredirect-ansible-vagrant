@@ -1,0 +1,3 @@
+---
+  - include: install-xrootd.yml
+  - include: common-configurations.yml

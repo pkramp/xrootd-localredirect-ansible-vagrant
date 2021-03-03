@@ -1,0 +1,29 @@
+---
+ - name: Copy systemd files for xrootd
+   copy:
+    src: "cmsd@.service"
+    dest: /etc/systemd/system/
+
+ - name: Copy systemd files for xrootd
+   copy:
+    src: "xrootd@.service"
+    dest: /etc/systemd/system/
+
+ - name: set CAP_NET_BIND for xrootd and cmsd
+   command: setcap CAP_NET_BIND_SERVICE=+eip {{ item }}
+   become_method: sudo
+   with_items:
+     - /usr/bin/xrootd
+     - /usr/bin/cmsd
+
+ - name: Ensure group "xrootd" exists
+   group:
+    name: xrootd
+    state: present
+
+ - name: Add the user 'xrootd' with a specific uid and a primary group of 'admin'
+   user:
+    name: xrootd
+    system: true
+    group: xrootd
+    state: present

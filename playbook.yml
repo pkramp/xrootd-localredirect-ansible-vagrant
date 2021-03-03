@@ -7,4 +7,11 @@
 - hosts: dataserver
   become: yes
   roles:
+    - xrootd
     - dataserver
+
+#- hosts: redirector
+#  become: yes
+#  roles:
+#    - xrootd
+#    - redirector

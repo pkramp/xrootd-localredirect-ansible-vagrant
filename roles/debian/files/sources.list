@@ -1,4 +1,0 @@
-deb     {{debian-sources}}  stretch  main contrib non-free
-deb-src {{debian-sources}}  stretch  main contrib non-free
-deb     {{debian-sources}}-security  stretch/updates  main contrib non-free
-deb-src {{debian-sources}}-security  stretch/updates  main contrib non-free

@@ -1,15 +1,14 @@
 all.manager 172.16.1.203 1095
 all.role server
-xrd.port 1094
 all.pidpath /var/run/xrootd
 all.adminpath /var/run/xrootd
 cms.space 1k 2k
 all.export / r/w
 oss.localroot /xrdmnt/
 
-if exec xrootd
-xrd.protocol http:80 /usr/lib64/libXrdHttp-4.so
-fi
+#if exec xrootd
+#xrd.protocol http:80 /usr/lib64/libXrdHttp-4.so
+#fi
 
 #ofs.authorize
 #ofs.authlib /usr/local/lib/libXrdAccSciTokens-4.so config=/etc/xrootd/scitokens.cfg

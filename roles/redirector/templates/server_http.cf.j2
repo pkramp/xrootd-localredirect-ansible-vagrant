@@ -1,11 +1,15 @@
 all.manager 172.16.1.203 1095
+all.role manager
 #xrd.port 1094
+com.dfs redirect immed
 all.pidpath /var/run/xrootd
 all.adminpath /var/run/xrootd
 cms.space 1k 2k
 all.export / r/w
 oss.localroot /xrdmnt/
+cms.delay startup 2
 #ofs.cmslib /usr/lib64/libCms
-if exec xrootd
-xrd.protocol http:80 /usr/lib64/libXrdHttp-4.so
-fi
+#if exec xrootd
+#xrd.protocol http:80 /usr/lib64/libXrdHttp-4.so
+#fi
+a

@@ -32,6 +32,7 @@
     - fuse
     - fuse-devel
     - libsqlite3x-devel.x86_64
+    - python
 
  - name: Copy custom xrootd source
    synchronize:
@@ -56,15 +57,15 @@
   # when: xrootd.changed
 
  - name: CMake xrootd
-   command: cmake3 -DCMAKE_INSTALL_PREFIX=/usr/ ../
+   command: sudo cmake3 -DCMAKE_INSTALL_PREFIX=/usr/ ../
    args:
     chdir: "/tmp/xrootd/build"
-#   environment:
-#    CPLUS_INCLUDE_PATH: /usr/include/openssl11/
+  # environment:
+  #  CPLUS_INCLUDE_PATH: /usr/include/openssl11/
   # when: xrootd.changed
 
  - name: Make xrootd
-   command: make -j 8
+   command: sudo make -j 8
    args:
     chdir: "/tmp/xrootd/build"
 #   environment:

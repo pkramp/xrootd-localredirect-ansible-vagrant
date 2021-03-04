@@ -5,7 +5,7 @@ all.adminpath /var/run/xrootd
 cms.space 1k 2k
 all.export / r/w
 oss.localroot /xrdmnt/
-
+#ofs.cmslib /usr/lib64/libCms
 if exec xrootd
 xrd.protocol http:80 /usr/lib64/libXrdHttp-4.so
 fi

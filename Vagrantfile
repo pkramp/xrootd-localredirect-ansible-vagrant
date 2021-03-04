@@ -18,6 +18,7 @@ Vagrant.configure("2") do |config|
     dataserver.vm.network "private_network", ip: "172.16.1.202",netmask:"255.240.0.0"
     dataserver.vm.provision :ansible do |ansible|
           ansible.playbook= "playbook.yml"
+          ansible.verbose = "vv"
     end
   end
   

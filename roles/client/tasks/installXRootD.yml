@@ -18,3 +18,4 @@
     update_cache: true
    with_items:
     - xrootd-client
+    - python
